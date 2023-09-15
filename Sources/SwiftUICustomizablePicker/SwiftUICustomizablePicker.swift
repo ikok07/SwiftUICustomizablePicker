@@ -8,29 +8,62 @@ import SwiftUI
 public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashable, Content: View {
     
     public var customIndicator: AnyView? = nil
-    public var indicatorPadding: EdgeInsets
     
-    public let sources: [Data]
+    private var indicatorPadding: EdgeInsets = EdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
+    private var indicatorBackgroundColor: Color = .accentColor
+    
     @Binding public var selection: Data
+    public let sources: [Data]
     public let itemBuilder: (Data) -> Content
     
-    public let height: CGFloat
-    public let cornerRadius: CGFloat
-    public let backgroundColor: Color
-    public let innerPadding: EdgeInsets
+    private var height: CGFloat = 32
+    private var cornerRadius: CGFloat = 7
+    private var backgroundColor: Color = Color(UIColor.label).opacity(0.05)
+    private var innerPadding: EdgeInsets = EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7)
     
-    public init(_ sources: [Data], selection: Binding<Data>, height: CGFloat = 32, cornerRadius: CGFloat = 7.0, backgroundColor: Color = Color(UIColor.label).opacity(0.05), indicatorPadding: EdgeInsets = EdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5), innerPadding: EdgeInsets = EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7), indicatorBuilder: (() -> AnyView)? = nil, @ViewBuilder itemBuilder: @escaping (Data) -> Content) {
+    public init(_ sources: [Data], selection: Binding<Data>, indicatorBuilder: (() -> AnyView)? = nil, @ViewBuilder itemBuilder: @escaping (Data) -> Content) {
         self.sources = sources
         self._selection = selection
         if let indicatorBuilder = indicatorBuilder {
             self.customIndicator = indicatorBuilder()
         }
-        self.height = height
-        self.cornerRadius = cornerRadius
-        self.backgroundColor = backgroundColor
-        self.indicatorPadding = indicatorPadding
-        self.innerPadding = innerPadding
         self.itemBuilder = itemBuilder
+    }
+    
+    func height(_ height: CGFloat) -> SwiftUICustomizablePicker {
+        var view = self
+        view.height = height
+        return view
+    }
+    
+    func cornerRadius(_ cornerRadius: CGFloat) -> SwiftUICustomizablePicker {
+        var view = self
+        view.cornerRadius = cornerRadius
+        return view
+    }
+    
+    func backgroundColor(_ backgroundColor: Color) -> SwiftUICustomizablePicker {
+        var view = self
+        view.backgroundColor = backgroundColor
+        return view
+    }
+    
+    func indicatorPadding(_ indicatorPadding: EdgeInsets) -> SwiftUICustomizablePicker {
+        var view = self
+        view.indicatorPadding = indicatorPadding
+        return view
+    }
+    
+    func innerPadding(_ innerPadding: EdgeInsets) -> SwiftUICustomizablePicker {
+        var view = self
+        view.innerPadding = innerPadding
+        return view
+    }
+    
+    func indicatorBackgroundColor(_ color: Color) -> SwiftUICustomizablePicker {
+        var view = self
+        view.indicatorBackgroundColor = color
+        return view
     }
     
     
@@ -44,7 +77,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
                         customIndicator
                     } else {
                         RoundedRectangle(cornerRadius: self.cornerRadius)
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(self.indicatorBackgroundColor)
                             .padding(self.indicatorPadding)
                             .frame(width: geometry.size.width / CGFloat(sources.count))
                             .animation(.spring().speed(1.5), value: selection)

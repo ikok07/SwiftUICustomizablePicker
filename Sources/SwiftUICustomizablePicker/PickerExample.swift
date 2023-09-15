@@ -20,6 +20,7 @@ struct PickerExample: View {
                     .font(.system(size: 15))
                     .fontWeight(selectedItem == item ? .semibold : .medium)
             }
+            .indicatorBackgroundColor(.red)
             
             // MARK: - Native Picker
             
