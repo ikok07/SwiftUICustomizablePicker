@@ -35,7 +35,7 @@ struct PickerExample: View {
                 Picker("", selection: $selectedItem) {
                     ForEach(Gender.allCases, id: \.self) { gender in
                         Text(gender.rawValue)
-                            .frame(width: .infinity)
+                            .frame(width: .infinity, height: 32)
                             .fixedSize()
                     }
                 }

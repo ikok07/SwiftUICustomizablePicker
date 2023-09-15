@@ -111,10 +111,9 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
                         }
                     }
                 }
-                
-                
             }
-            .frame(maxWidth: self.width, maxHeight: self.height)
+            .frame(maxWidth: .infinity, idealHeight: self.height, maxHeight: self.height)
+            
             
         }
         .padding(self.innerPadding)
