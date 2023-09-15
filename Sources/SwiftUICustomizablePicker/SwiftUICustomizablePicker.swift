@@ -10,7 +10,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
     public var customIndicator: AnyView? = nil
     
     private var indicatorPadding: EdgeInsets = EdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
-    private var indicatorBackgroundColor: Color = .accentColor
+    private var indicatorBackgroundGradient: LinearGradient = LinearGradient(gradient: Gradient(colors: [.accentColor]), startPoint: .topLeading, endPoint: .bottomTrailing)
     
     @Binding public var selection: Data
     public let sources: [Data]
@@ -60,9 +60,9 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
         return view
     }
     
-    func indicatorBackgroundColor(_ color: Color) -> SwiftUICustomizablePicker {
+    func indicatorBackgroundGradient(_ gradient: LinearGradient) -> SwiftUICustomizablePicker {
         var view = self
-        view.indicatorBackgroundColor = color
+        view.indicatorBackgroundGradient = gradient
         return view
     }
     
@@ -77,7 +77,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
                         customIndicator
                     } else {
                         RoundedRectangle(cornerRadius: self.cornerRadius)
-                            .foregroundColor(self.indicatorBackgroundColor)
+                            .foregroundStyle(self.indicatorBackgroundGradient)
                             .padding(self.indicatorPadding)
                             .frame(width: geometry.size.width / CGFloat(sources.count))
                             .animation(.spring().speed(1.5), value: selection)
