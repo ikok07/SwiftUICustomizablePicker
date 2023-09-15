@@ -16,6 +16,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
     public let sources: [Data]
     public let itemBuilder: (Data) -> Content
     
+    private var width: CGFloat = UIScreen.main.bounds.width * 0.95
     private var height: CGFloat = 32
     private var cornerRadius: CGFloat = 7
     private var backgroundColor: Color = Color(UIColor.label).opacity(0.05)
@@ -28,6 +29,17 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
             self.customIndicator = indicatorBuilder()
         }
         self.itemBuilder = itemBuilder
+    }
+    
+    public func frame(width: CGFloat? = nil, height: CGFloat? = nil) -> SwiftUICustomizablePicker {
+        var view = self
+        if let width = width {
+            view.width = width
+        }
+        if let height = height {
+            view.height = height
+        }
+        return view
     }
     
     public func height(_ height: CGFloat) -> SwiftUICustomizablePicker {
@@ -102,7 +114,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
                 
                 
             }
-            .frame(width: UIScreen.main.bounds.width * 0.9, height: 32)
+            .frame(width: self.width, height: self.height)
             
         }
         .padding(self.innerPadding)
