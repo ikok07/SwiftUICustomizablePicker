@@ -103,7 +103,7 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
                             ZStack {
                                 itemBuilder(item)
                             }
-                            .frame(width: geometry.size.width / CGFloat(sources.count), height: 32)
+                            .frame(maxWidth: geometry.size.width / CGFloat(sources.count), maxHeight: 32)
                             .contentShape(RoundedRectangle(cornerRadius: self.cornerRadius))
                             .onTapGesture {
                                 selection = item

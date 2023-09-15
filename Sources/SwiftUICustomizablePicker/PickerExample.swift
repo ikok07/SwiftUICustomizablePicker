@@ -2,7 +2,7 @@
 import SwiftUI
 
 enum Gender: String, CaseIterable, Codable {
-    case Male, Female
+    case Male, Female, RealyLongEnumForTest
 }
 
 @available(iOS 15.0.0, *)
@@ -19,7 +19,12 @@ struct PickerExample: View {
                     .foregroundColor(selectedItem == item ? .white : .black)
                     .font(.system(size: 15))
                     .fontWeight(selectedItem == item ? .semibold : .medium)
+                    .frame(width: 100)
+                    .multilineTextAlignment(.center)
+                    .fixedSize()
             }
+            .frame(width: .infinity)
+            .padding()
             
             // MARK: - Native Picker
             
@@ -30,6 +35,8 @@ struct PickerExample: View {
                 Picker("", selection: $selectedItem) {
                     ForEach(Gender.allCases, id: \.self) { gender in
                         Text(gender.rawValue)
+                            .frame(width: .infinity)
+                            .fixedSize()
                     }
                 }
                 .pickerStyle(.segmented)
