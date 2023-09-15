@@ -30,37 +30,37 @@ public struct SwiftUICustomizablePicker<Data, Content> : View where Data: Hashab
         self.itemBuilder = itemBuilder
     }
     
-    func height(_ height: CGFloat) -> SwiftUICustomizablePicker {
+    public func height(_ height: CGFloat) -> SwiftUICustomizablePicker {
         var view = self
         view.height = height
         return view
     }
     
-    func cornerRadius(_ cornerRadius: CGFloat) -> SwiftUICustomizablePicker {
+    public func cornerRadius(_ cornerRadius: CGFloat) -> SwiftUICustomizablePicker {
         var view = self
         view.cornerRadius = cornerRadius
         return view
     }
     
-    func backgroundColor(_ backgroundColor: Color) -> SwiftUICustomizablePicker {
+    public func backgroundColor(_ backgroundColor: Color) -> SwiftUICustomizablePicker {
         var view = self
         view.backgroundColor = backgroundColor
         return view
     }
     
-    func indicatorPadding(_ indicatorPadding: EdgeInsets) -> SwiftUICustomizablePicker {
+    public func indicatorPadding(_ indicatorPadding: EdgeInsets) -> SwiftUICustomizablePicker {
         var view = self
         view.indicatorPadding = indicatorPadding
         return view
     }
     
-    func innerPadding(_ innerPadding: EdgeInsets) -> SwiftUICustomizablePicker {
+    public func innerPadding(_ innerPadding: EdgeInsets) -> SwiftUICustomizablePicker {
         var view = self
         view.innerPadding = innerPadding
         return view
     }
     
-    func indicatorBackgroundGradient(_ gradient: LinearGradient) -> SwiftUICustomizablePicker {
+    public func indicatorBackgroundGradient(_ gradient: LinearGradient) -> SwiftUICustomizablePicker {
         var view = self
         view.indicatorBackgroundGradient = gradient
         return view
